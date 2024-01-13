@@ -23,7 +23,7 @@
 function getIntervalArray(start, end) {
   let value = start - 1;
 
-  return Array.from({length: end - start + 1}, function() {
+  return Array.from({ length: end - start + 1 }, function () {
     value += 1;
 
     return value;
@@ -49,7 +49,7 @@ function sumArrays(arr1, arr2) {
 
   let bigArr;
   let littleArr;
-  let resultArr = [];
+  const resultArr = [];
 
   if (arr1.length > arr2.length) {
     bigArr = arr1;
@@ -59,7 +59,7 @@ function sumArrays(arr1, arr2) {
     littleArr = arr1;
   }
 
-  bigArr.map(function(item, index) {
+  bigArr.map(function (item, index) {
     if (index >= littleArr.length) {
       resultArr.push(item);
     } else {
@@ -150,15 +150,14 @@ function getStringsLength(arr) {
  *   getAverage([ 2, 3, 3 ])  => 2,67
  */
 function getAverage(arr) {
-  let sum = arr.reduce(function(accumulator, element) {
+  const sum = arr.reduce(function (accumulator, element) {
     return accumulator + element;
   }, 0);
 
   if (Number.isNaN(sum) || arr.length === 0) {
     return 0;
-  } else {
-    return +(sum / arr.length).toFixed(2);
   }
+  return +(sum / arr.length).toFixed(2);
 }
 
 /**
@@ -235,9 +234,8 @@ function getTail(arr, n) {
   console.log(arr);
   if (n === 0) {
     return [];
-  } else {
-    return arr.splice(-n);
   }
+  return arr.splice(-n);
 }
 
 /**
@@ -306,9 +304,8 @@ function distinct(arr) {
 function createNDimensionalArray(n, size) {
   if (n === 1) {
     return Array(size).fill(0);
-  } else {
-    return Array(size).fill(createNDimensionalArray(n - 1, size));
   }
+  return Array(size).fill(createNDimensionalArray(n - 1, size));
 }
 
 /**
@@ -340,9 +337,9 @@ function flattenArray(nestedArray) {
  *   selectMany(['one','two','three'], (x) => x.split('')) =>   ['o','n','e','t','w','o','t','h','r','e','e']
  */
 function selectMany(arr, childrenSelector) {
-  return arr.flatMap(function(element) {
+  return arr.flatMap(function (element) {
     return childrenSelector(element);
-  })
+  });
 }
 
 /**
@@ -363,7 +360,7 @@ function calculateBalance(arr) {
     return arr;
   }
 
-  return arr.reduce(function(accumulator, item) {
+  return arr.reduce(function (accumulator, item) {
     return accumulator + item[0] - item[1];
   }, 0);
 }
@@ -381,9 +378,12 @@ function calculateBalance(arr) {
  *    createChunks([10, 20, 30, 40, 50], 1) => [[10], [20], [30], [40], [50]]
  */
 function createChunks(arr, chunkSize) {
-  let resultArr = Array.from({length: Math.ceil(arr.length / chunkSize)}, () => []);
+  const resultArr = Array.from(
+    { length: Math.ceil(arr.length / chunkSize) },
+    () => []
+  );
 
-  arr.map(function(item, index) {
+  arr.map(function (item, index) {
     resultArr[Math.floor(index / chunkSize)].push(item);
   });
 
@@ -403,7 +403,7 @@ function createChunks(arr, chunkSize) {
  *    generateOdds(5) => [ 1, 3, 5, 7, 9 ]
  */
 function generateOdds(len) {
-  return Array.from({length: len}, (item, index) => {
+  return Array.from({ length: len }, (item, index) => {
     return index * 2 + 1;
   });
 }
@@ -423,9 +423,11 @@ function generateOdds(len) {
 function getElementByIndices(arr, indices) {
   if (indices.length === 1) {
     return arr[indices[0]];
-  } else if (indices.length === 2){
+  }
+  if (indices.length === 2) {
     return arr[indices[0]][indices[1]];
-  } else if (indices.length === 3) {
+  }
+  if (indices.length === 3) {
     return arr[indices[0]][indices[1]][indices[2]];
   }
 }
@@ -445,15 +447,13 @@ function getElementByIndices(arr, indices) {
 function getFalsyValuesCount(arr) {
   if (arr.length === 0) {
     return 0;
-  } else {
-    return arr.reduce(function(accumulator, item) {
-      if (!item) {
-        return accumulator + 1;
-      } else {
-        return accumulator;
-      }
-    }, 0);
   }
+  return arr.reduce(function (accumulator, item) {
+    if (!item) {
+      return accumulator + 1;
+    }
+    return accumulator;
+  }, 0);
 }
 
 /**
@@ -475,16 +475,15 @@ function getFalsyValuesCount(arr) {
  *                              [0,0,0,0,1]]
  */
 function getIdentityMatrix(n) {
-  let resultArr = Array.from({length: n}, () => []);
+  const resultArr = Array.from({ length: n }, () => []);
 
-  return resultArr.map(function(item1, index1) {
-    return Array.from({length: n}, function(item2, index2) {
+  return resultArr.map(function (item1, index1) {
+    return Array.from({ length: n }, function (item2, index2) {
       if (index1 === index2) {
         return 1;
-      } else {
-        return 0;
       }
-    })
+      return 0;
+    });
   });
 }
 
@@ -500,9 +499,9 @@ function getIdentityMatrix(n) {
  *    getIndicesOfOddNumbers([11, 22, 33, 44, 55]) => [0, 2, 4]
  */
 function getIndicesOfOddNumbers(numbers) {
-  let resultArr = [];
+  const resultArr = [];
 
-  numbers.map(function(item, index) {
+  numbers.map(function (item, index) {
     if (item % 2 !== 0) {
       resultArr.push(index);
     }
@@ -523,9 +522,9 @@ function getIndicesOfOddNumbers(numbers) {
  */
 function getHexRGBValues(arr) {
   return arr.map((item) => {
-    let result = item.toString(16).toUpperCase();
+    const result = item.toString(16).toUpperCase();
 
-    return '#' + '0'.repeat(6 - result.length) + result;
+    return `#${'0'.repeat(6 - result.length)}${result}`;
   });
 }
 
@@ -544,22 +543,24 @@ function getHexRGBValues(arr) {
  *   getMaxItems([ 10, 10, 10, 10 ], 3) => [ 10, 10, 10 ]
  */
 function getMaxItems(arr, n) {
-  let newArr = arr;
+  const newArr = arr;
 
   if (newArr.length === 0) {
     return arr;
-  } else {
-    let resultArr = Array.from({length: n});
-
-    return resultArr.map(() => {
-      let maxValue = Math.max(...newArr);
-      console.log(maxValue);
-      console.log(resultArr);
-      newArr.splice(newArr.findIndex((element) => element === maxValue), 1);
-
-      return maxValue;
-    });
   }
+  const resultArr = Array.from({ length: n });
+
+  return resultArr.map(() => {
+    const maxValue = Math.max(...newArr);
+    console.log(maxValue);
+    console.log(resultArr);
+    newArr.splice(
+      newArr.findIndex((element) => element === maxValue),
+      1
+    );
+
+    return maxValue;
+  });
 }
 
 /**
@@ -575,9 +576,9 @@ function getMaxItems(arr, n) {
  *    findCommonElements([1, 2, 3], ['a', 'b', 'c']) => []
  */
 function findCommonElements(arr1, arr2) {
-  let resultArr = [];
+  const resultArr = [];
 
-  arr1.map(function(item) {
+  arr1.map(function (item) {
     if (arr2.includes(item)) {
       resultArr.push(item);
     }
@@ -616,16 +617,15 @@ function findLongestIncreasingSubsequence(nums) {
       results.push(element);
 
       return element;
-    } else {
-      if (results.length > max) {
-        max = results.length;
-      }
-
-      results = [];
-      results.push(element);
-
-      return element;
     }
+    if (results.length > max) {
+      max = results.length;
+    }
+
+    results = [];
+    results.push(element);
+
+    return element;
   }, -Infinity);
 
   return max;
@@ -646,10 +646,10 @@ function findLongestIncreasingSubsequence(nums) {
  *  propagateItemsByPositionIndex([ 1,2,3,4,5 ]) => [ 1, 2, 2, 3, 3, 3, 4, 4, 4, 4, 5, 5, 5, 5, 5 ]
  */
 function propagateItemsByPositionIndex(arr) {
-  let resultArr = [];
+  const resultArr = [];
 
-  arr.map(function(element, index) {
-    resultArr.push(Array.from({length: index + 1}, () => element));
+  arr.map(function (element, index) {
+    resultArr.push(Array.from({ length: index + 1 }, () => element));
   });
 
   return resultArr.flat();
@@ -669,19 +669,19 @@ function propagateItemsByPositionIndex(arr) {
  *    shiftArray([10, 20, 30, 40, 50], -3) => [40, 50, 10, 20, 30]
  */
 function shiftArray(arr, n) {
-  let resultArr = [...arr];
+  const resultArr = [...arr];
 
   if (n > 0) {
     arr.reverse();
 
-    arr.map(function(element, index) {
+    arr.map(function (element, index) {
       if (index < n) {
         resultArr.pop();
         resultArr.unshift(element);
       }
     });
   } else if (n < 0) {
-    arr.map(function(element, index) {
+    arr.map(function (element, index) {
       if (index < -n) {
         resultArr.shift();
         resultArr.push(element);
@@ -811,13 +811,15 @@ function sortDigitNamesByNumericOrder(arr) {
  *
  */
 function swapHeadAndTail(arr) {
-  let resultArr = [];
+  const resultArr = [];
 
   if (arr.length < 2) {
     return arr;
-  } else if (arr.length < 4) {
+  }
+  if (arr.length < 4) {
     return arr.reverse();
-  } else if (arr.length % 2 === 0) {
+  }
+  if (arr.length % 2 === 0) {
     resultArr.push(arr.slice(arr.length / 2));
     resultArr.push(arr.slice(0, arr.length / 2));
   } else {
